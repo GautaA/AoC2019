@@ -11,23 +11,14 @@ public class Day1_2 {
     public static void main(String[] args) {
 
         String filePath = "C:\\Users\\anton\\Desktop\\Fer\\AoC2019\\Day1\\input.txt";
-        List<Integer> input = new LinkedList<Integer>();
         int result = 0;
 
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-            input = stream
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
+            result = stream.mapToInt(Integer::valueOf).map(i -> calculateFuel(i)).sum();
+            System.out.println(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (int current : input) {
-            result += calculateFuel(current);
-        }
-
-        System.out.println(result);
-
     }
 
     public static int calculateFuel(int current) {
